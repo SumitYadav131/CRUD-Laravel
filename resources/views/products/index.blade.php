@@ -22,6 +22,7 @@
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,13 @@
                         <td>{{ $product->price }}</td>
                         <td>
                             <a href="{{ route('product.edit', ['product' => $product]) }}">Edit</a>
+                        </td>
+                        <td>
+                            <form method="post" action="">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

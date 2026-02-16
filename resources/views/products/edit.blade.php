@@ -16,26 +16,26 @@
             @endforeach
         @endif
     </div>
-    <form action="" method="POST">
+    <form method="POST" action="{{ route('product.update', ['product' => $product]) }}">
         @csrf
-        @method('POST')
+        @method('put')
         <div>
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="{{ $product->name }}" required>
         </div>
         <div>
             <label for="description">Description:</label>
-            <textarea id="description" name="description" value="{{ $product->description }}" required></textarea>
+            <textarea id="description" name="description" required>{{ $product->description }}</textarea>
         </div>
         <div>
             <label for="qty">Quantity:</label>
-            <input type="number" id="qty" name="qty" required>
+            <input type="number" id="qty" name="qty" value="{{ $product->qty }}" required>
         </div>
         <div>
             <label for="price">Price:</label>
-            <input type="number" id="price" name="price" required>
+            <input type="number" id="price" name="price" value="{{ $product->price }}" required>
         </div>
-        <button type="submit">Create</button>
+        <button type="submit">Update</button>
     </form>
 </body>
 
