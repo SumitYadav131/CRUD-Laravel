@@ -1,42 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Product</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Create Product</h1>
-    <div>
-        @if($errors->any())
-            @foreach($errors->all() as $error)
-                <div style="color:red;">{{ $error }}</div>
-            @endforeach
-        @endif
-    </div>
-    <form action="{{ route('product.store') }}" method="POST">
-        @csrf
-        @method('POST')
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
-        </div>
-        <div>
-            <label for="qty">Quantity:</label>
-            <input type="number" id="qty" name="qty" required>
-        </div>
-        <div>
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" required>
-        </div>
-        <button type="submit">Create</button>
-    </form>
-</body>
+<body class="bg-light">
 
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Create New Product</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('product.store') }}" method="POST">
+                        @csrf
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                class="form-control"
+                                value="{{ old('name') }}"
+                                required>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea 
+                                name="description" 
+                                class="form-control"
+                                rows="3"
+                                required>{{ old('description') }}</textarea>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="mb-3">
+                            <label class="form-label">Quantity</label>
+                            <input 
+                                type="number" 
+                                name="qty" 
+                                class="form-control"
+                                value="{{ old('qty') }}"
+                                required>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label class="form-label">Price ($)</label>
+                            <input 
+                                type="number" 
+                                step="0.01"
+                                name="price" 
+                                class="form-control"
+                                value="{{ old('price') }}"
+                                required>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('product.index') }}" class="btn btn-secondary">
+                                Back
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                Create Product
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>
